@@ -19,7 +19,7 @@ async function shortenUrl(req, res) {
     await Url.create({
         shortId : shortUrl,
         redirectURL : originalUrl,
-        visitedHistory : []
+        visitedHistory : [] 
     }).then(() => {
         console.log('URL shortened successfully');
     }).catch((err) => {
