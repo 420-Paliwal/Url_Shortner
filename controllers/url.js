@@ -6,8 +6,7 @@ async function getUrl(req, res) {
     const originalUrl = await Url.findOne({
         shortId : shortIdParams
     })
-    console.log(originalUrl.redirectURL);
-    res.status(302).json({ redirectURL : originalUrl.redirectURL });
+    res.redirect(originalUrl.redirectURL);
 }
 
 async function shortenUrl(req, res) {
@@ -26,7 +25,9 @@ async function shortenUrl(req, res) {
         console.error('Error shortening URL', err);
         return res.status(500).json({ error : 'Internal Server Error' });
         })
-    return res.status(201).json({ shortUrl : `http://localhost:8000/${shortUrl}` });
+    res.render('home', {
+        id : shortUrl
+    })
 }
 
 module.exports = { shortenUrl, getUrl };
