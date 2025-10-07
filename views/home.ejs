@@ -8,9 +8,27 @@
 <body>
     <h1>URL Shortner </h1>
 
-    <% if (locals.id) { %>
-       <h3>Your Shorten Url Is Generated</h3>
-        <a target="_blank" href="http://localhost:8000/url/<%= id %>">Generated Url</a>
+    <% if (locals.urls) { %>
+        <% console.log(locals.urls) %>  
+        <table>
+            <thead>
+                <th>S. No</th>
+                <th>Short Id</th>
+                <th>Redirect</th>
+                <th>Clicks</th>
+            </thead>
+            <tbody>
+                
+                <% urls.forEach((url, index) => { %>
+                    <tr>
+                    <td> <%= index + 1 %> </td>
+                    <td><%= url.shortId %></td>
+                    <td><%= url.redirectURL %></td>
+                    <td><%= url.visitedHistory.length %></td>
+                    </tr>
+                <% }) %>
+            </tbody>
+        </table>
     <% } %>
 
     <form method="post" action="/url">
