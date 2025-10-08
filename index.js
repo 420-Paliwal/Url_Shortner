@@ -7,6 +7,8 @@ const mongoose = require('mongoose')
 const Url = require("./models/url")
 const staticRoute = require('./routes/staticrouter')
 const userRoute = require('./routes/user')
+
+
 mongoose.connect('mongodb://localhost:27017/urlShortner', {
     useNewUrlParser : true,
     useUnifiedTopology : true

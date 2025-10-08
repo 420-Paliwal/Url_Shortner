@@ -3,8 +3,8 @@ const router = express.Router();
 const Url = require('../models/url')
 const { getAllUsers, createUser, loginUser } = require('../controllers/user');
 
-router.get('/', (req, res) => {
-    const allUrls = Url.find({})
+router.get('/',async (req, res) => {
+    const allUrls = await Url.find({})
     return res.render('home', {
         urls : allUrls
     })
