@@ -4,10 +4,7 @@ const Url = require('../models/url')
 const { getAllUsers, createUser, loginUser } = require('../controllers/user');
 
 router.get('/',async (req, res) => {
-    const allUrls = await Url.find({})
-    return res.render('home', {
-        urls : allUrls
-    })
+    return res.render('home')
 })
 router.get('/login', (req, res) => {
     return res.render('login')

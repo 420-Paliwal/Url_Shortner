@@ -7,7 +7,8 @@ const mongoose = require('mongoose')
 const Url = require("./models/url")
 const staticRoute = require('./routes/staticrouter')
 const userRoute = require('./routes/user')
-
+const cookieParser = require('cookie-parser')
+const { restrictToLoggedinUserOnly } = require('./middleware/auth')
 
 mongoose.connect('mongodb://localhost:27017/urlShortner', {
     useNewUrlParser : true,
@@ -23,9 +24,9 @@ app.set('views', path.resolve('./views'))
 
 app.use(express.json())                                    
 app.use(express.urlencoded({extended: true}))
+app.use(cookieParser())
 
-
-app.use('/url', urlRoute)
+app.use('/url',restrictToLoggedinUserOnly, urlRoute)
 app.use('/', staticRoute)
 app.use('/user', userRoute)
 

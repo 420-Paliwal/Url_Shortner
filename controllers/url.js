@@ -1,10 +1,11 @@
 const shortId = require('shortid');
 const Url = require('../models/url');
+const { setUser, getUser } = require('../services/auth');
 
 async function getAllUrls(req, res) {
     const allUrls = await Url.find({});
     res.render('home', {
-        urls : allUrls
+        urls : allUrls,
     })
 }
 async function getUrl(req, res) {
@@ -35,8 +36,8 @@ async function shortenUrl(req, res) {
         console.log('URL shortened successfully');
         getAllUrls(req, res)
     }).catch((err) => {
-        console.error('Error shortening URL', err);
-        return res.status(500).json({ error : 'Internal Server Error' });
+        console.error('Error shortening URL:', err);
+        return res.status(500).json({ error : 'Internal Server Error / Duplicate Url' });
         })
 
 }

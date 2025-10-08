@@ -29,7 +29,6 @@ async function loginUser(req, res){
         const sessionId = uuidv4()
         setUser(sessionId, existingUser)
         res.cookie('sessionId', sessionId)
-        console.log("User Logged In", sessionId , existingUser)
         getAllUrls(req, res)
     }
     else{
