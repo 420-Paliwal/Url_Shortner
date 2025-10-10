@@ -26,9 +26,8 @@ async function loginUser(req, res){
     console.log(email, password)
     const existingUser = await user.findOne({email, password})
     if(existingUser){
-        const sessionId = uuidv4()
-        setUser(sessionId, existingUser)
-        res.cookie('sessionId', sessionId)
+        const token = setUser(existingUser)
+        res.cookie('token', token)
         getAllUrls(req, res)
     }
     else{
